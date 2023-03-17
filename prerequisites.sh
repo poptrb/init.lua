@@ -18,8 +18,10 @@ sudo apt install -y \
   python3 \
   python3-dev \
   python3-pip \
+  python3-venv \
   shellcheck \
-  tasksel
+  tasksel \
+  unzip
 
 if ! command -V nvim &> /dev/null; then
   NEOVIM_TARBALL=https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz
