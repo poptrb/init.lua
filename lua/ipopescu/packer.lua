@@ -7,19 +7,26 @@ return require('packer').startup(function(use)
   }
 
   use({
-	  'kyazdani42/blue-moon',
-	  as = 'blue-moon',
-	  config = function()
-		  vim.cmd('colorscheme blue-moon')
-	  end
+    "catppuccin/nvim",
+    as = "theme-catppuccin"
   })
-
+--  use({
+--	  'projekt0n/github-nvim-theme',
+--	  as = 'github-theme',
+--	  config = function()
+--      require('github-theme').setup({
+--        theme_style = light,
+--        sidebars = {"terminal", "packer"}
+--      })
+--	  end
+--  })
+--
   use("theprimeagen/harpoon")
   use({
-	"nvim-treesitter/nvim-treesitter",
-	run = ":TSUpdate"
+		"nvim-treesitter/nvim-treesitter",
+                --commit = "4cccb6f494eb255b32a290d37c35ca12584c74d0",
+		run = ":TSUpdate"
   })
-  use("nvim-treesitter/playground")
 
   use {
         'VonHeikemen/lsp-zero.nvim',
