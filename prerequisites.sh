@@ -2,10 +2,22 @@
 
 set -eu -o pipefail
 
+NODE_MAJOR=20
 #[[ $(id -u) != 0 ]] && { echo 'Please run as the root user.'; exit 1; }
 
-# Install Node
-[ ! -f /etc/apt/sources.list.d/nodesource.list ] && sudo bash -c 'curl -fsSL https://deb.nodesource.com/setup_14.x | bash -'
+# Install dependencies for importing GPG Keys
+sudo apt-get update > /dev/null
+sudo apt-get install -y ca-certificates curl gnupg
+sudo mkdir -p /etc/apt/keyrings
+
+# Configure GPG keys for NodeJS Nodesource repository
+curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | \
+       	sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+
+sudo bash -c 'cat <<EOF > /etc/apt/sources.list.d/nodesource.list
+deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main
+EOF
+'
 
 # Install neovim dependencies
 sudo apt install -y \
